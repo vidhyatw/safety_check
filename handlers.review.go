@@ -29,7 +29,7 @@ func getreview(c *gin.Context) {
 	// Check if the review ID is valid
 	if reviewID, err := strconv.Atoi(c.Param("review_id")); err == nil {
 		// Check if the review exists
-		if review, err := getreviewByID(reviewID); err == nil {
+		if review, err := getReviewByID(reviewID); err == nil {
 			// Call the render function with the title, review and the name of the
 			// template
 			render(c, gin.H{
@@ -52,7 +52,7 @@ func createreview(c *gin.Context) {
 	title := c.PostForm("title")
 	content := c.PostForm("content")
 
-	if a, err := createNewreview(title, content); err == nil {
+	if a, err := createNewReview(title, content); err == nil {
 		// If the review is created successfully, show success message
 		render(c, gin.H{
 			"title":   "Submission Successful",

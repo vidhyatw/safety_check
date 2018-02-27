@@ -28,7 +28,7 @@ func TestGetAllreviews(t *testing.T) {
 
 // Test the function that fetche an review by its ID
 func TestGetreviewByID(t *testing.T) {
-	a, err := getreviewByID(1)
+	a, err := getReviewByID(1)
 
 	if err != nil || a.ID != 1 || a.Title != "review 1" || a.Content != "review 1 body" {
 		t.Fail()
