@@ -1,0 +1,18 @@
+<!--index.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+  <!--Loop over the `payload` variable, which is the list of review-->
+  {{range .payload }}
+    <!--Create the link for the review based on its ID-->
+    <a href="/review/view/{{.ID}}">
+      <!--Display the title of the review -->
+      <h2>{{.Title}}</h2>
+    </a>
+    <!--Display the content of the review-->
+    <p>{{.Content}}</p>
+  {{end}}
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

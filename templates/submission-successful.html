@@ -1,0 +1,14 @@
+<!--submission-successful.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+
+<div>
+  <strong>The review was successfully submitted.</strong>
+  
+  <!--Display the linked title of the newly created review-->
+  <a href="/review/view/{{.payload.ID}}">{{.payload.Title}}</a>
+</div>
+    
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
