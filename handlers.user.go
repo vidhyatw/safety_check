@@ -17,6 +17,12 @@ func showLoginPage(c *gin.Context) {
 	}, "login.html")
 }
 
+func showWriteReviewPage(c *gin.Context) {
+	render(c, gin.H{
+		"title": "Write Review",
+	}, "create-review.html")
+}
+
 func performLogin(c *gin.Context) {
 	// Obtain the POSTed username and password values
 	username := c.PostForm("username")

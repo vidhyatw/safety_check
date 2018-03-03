@@ -1,0 +1,9 @@
+.checked {
+    color: orange;
+}
+.button_style1 {
+    color: white;
+    font-size: 20px;
+    background-color: #7cced4;
+}
+.bar { fill: steelblue; }

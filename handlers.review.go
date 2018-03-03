@@ -16,7 +16,7 @@ func showIndexPage(c *gin.Context) {
 	// render(c, gin.H{
 	// 	"title":   "Home Page",
 	// 	"payload": reviews}, "index.html")
-	render(c, gin.H{}, "fb.html")
+	render(c, gin.H{}, "landing-page.html")
 }
 
 func showreviewCreationPage(c *gin.Context) {

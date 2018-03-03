@@ -11,6 +11,8 @@ func initializeRoutes() {
 	// Handle the index route
 	router.GET("/", showIndexPage)
 
+	router.GET("/review/new", showWriteReviewPage)
+
 	// Group user related routes together
 	userRoutes := router.Group("/u")
 	{
