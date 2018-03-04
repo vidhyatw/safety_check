@@ -2,6 +2,12 @@ package models
 
 import "testing"
 
+func saveLists() {
+
+}
+
+func restoreLists() {}
+
 // Test the validity of different combinations of username/password
 func TestUserValidity(t *testing.T) {
 	if !IsUserValid("user1", "pass1") {

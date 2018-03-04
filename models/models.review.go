@@ -1,7 +1,7 @@
 package models
 
 type Review struct {
-	ID        int      `json:"id"`
+	ID        int      `json:"_id"`
 	Title     string   `form:"title" json:"title" binding:"omitempty,len=0"`
 	Rating    int      `form:"rating" json:"rating" binding:"required"`
 	Content   string   `form:"content" json:"content" binding:"omitempty,len=0"`
@@ -30,7 +30,7 @@ type Votes struct {
 }
 
 // Fetch an review based on the ID supplied
-func GetReviewsForPlace(place Place) ([]Review, error) {
+func GetReviewsForPlace(place Place) (string, []Review, error) {
 	ds := GetDatasource()
 	return ds.FindReviewsForPlace(place)
 }

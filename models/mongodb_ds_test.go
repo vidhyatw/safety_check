@@ -1,51 +1,44 @@
 package models
 
 import (
-	"errors"
 	"testing"
+	"time"
 
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/aws/aws-sdk-go/service/dynamodb"
-	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
+	"github.com/stretchr/testify/assert"
 )
 
-type fakeDynamoDB struct {
-	dynamodbiface.DynamoDBAPI
-	payload      []string
-	feedbackData FeedbackData
+func TestCreateReview(t *testing.T) {
+	mongoDb := newMongoDBDS()
+	defer mongoDb.mongoSession.Close()
+	if false {
+		place := Place{PlaceID: "ChIJJf4m6glYqDsRh5BROhTjgXE", Type: "Shopping  Mall", Coordinates: []float64{76.9917911, 11.0556083}}
+		reviewer := Reviewer{Name: "Vidhya", Age: 18, Gender: "Female"}
+		review := Review{Title: "Great Place", TimeStamp: time.Now().String(), Rating: 5,
+			Content: "Very safe @ nite", VisitTime: "10:00 PM", Place: place, Reviewer: reviewer}
+		err := mongoDb.CreateReview(review)
+		assert.Nil(t, err)
+
+	}
 }
 
-func (fakeDynamo *fakeDynamoDB) PutItem(input *dynamodb.PutItemInput) (*dynamodb.PutItemOutput, error) {
-	for _, v := range fakeDynamo.payload {
-		if v == *input.Item["Timestamp"].S {
-			return nil, awserr.New(
-				dynamodb.ErrCodeConditionalCheckFailedException,
-				"The conditional request failed",
-				errors.New("status code: 400, request id: 8VD67UJTFVS4FMOH8UMEV65M6BVV4KQNSO5AEMVJF66Q9ASUAAJG"),
-			)
-		}
-	}
-	feedback, ok := input.Item["Feedback"]
-	if ok && feedback.S != nil && len(*feedback.S) == 0 {
-		return nil, awserr.New(
-			"ValidationException",
-			"One or more parameter values were invalid: An AttributeValue may not contain an empty string",
-			nil)
-	}
-	fakeDynamo.payload = append(fakeDynamo.payload, *input.Item["Timestamp"].S)
-	return nil, nil
+func TestFindReviewsForPlace(t *testing.T) {
+	mongoDb := newMongoDBDS()
+	defer mongoDb.mongoSession.Close()
+
+	place := Place{PlaceID: "ChIJJf4m6glYqDsRh5BROhTjgXE", Type: "Shopping  Mall", Coordinates: []float64{76.9917911, 11.0556083}}
+	findType, reviews, err := mongoDb.FindReviewsForPlace(place)
+	assert.Equal(t, "PLACE", findType)
+	assert.True(t, true, len(reviews) > 0)
+	assert.Nil(t, err)
 }
 
-func TestDynamoDBRegistry_Put(t *testing.T) {
-	f := FeedbackData{Timestamp: "12-12-2012", Feedback: "Very helpful test"}
-	db := fakeDynamoDB{payload: []string{}, feedbackData: f}
-	var feedbackDS FeedbackDS = dynamoDBDS{&db}
+func TestFindReviewsForPlace_NearBy(t *testing.T) {
+	mongoDb := newMongoDBDS()
+	defer mongoDb.mongoSession.Close()
 
-	err := feedbackDS.Put(f)
-	if err != nil {
-		t.Fatalf("FAIL, Error received: %v", err)
-	}
-	if db.payload[0] != "12-12-2012" {
-		t.Fatalf("FAIL, Feeback not saved in DynamoDB")
-	}
+	place := Place{PlaceID: "ChIJGQ6k2QhYqDsRgkxMNsJi8Jw", Type: "Shopping  Mall", Coordinates: []float64{76.9940433, 11.054779}}
+	findType, reviews, err := mongoDb.FindReviewsForPlace(place)
+	assert.Equal(t, "NEARBY", findType)
+	assert.True(t, true, len(reviews) > 0)
+	assert.Nil(t, err)
 }

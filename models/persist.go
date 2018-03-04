@@ -6,12 +6,12 @@ import (
 	"github.com/hackerearth/safetycheck/config"
 )
 
-type PersistDS interface {
+type DBApi interface {
 	CreateReview(review Review) error
-	FindReviewsForPlace(place Place) ([]Review, error)
+	FindReviewsForPlace(place Place) (string, []Review, error)
 }
 
-func GetDatasource() PersistDS {
+func GetDatasource() DBApi {
 	if strings.ToLower(config.GetEnvironment()) == "DEVELOPMENT" {
 		return newTmpFileDS()
 	} else {

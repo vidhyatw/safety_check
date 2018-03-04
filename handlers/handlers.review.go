@@ -51,7 +51,7 @@ func GetReview(c *gin.Context) {
 
 	if place, err := createPlaceFromParams(c); err == nil {
 		// Check if the review exists
-		if review, err := models.GetReviewsForPlace(place); err == nil {
+		if _, review, err := models.GetReviewsForPlace(place); err == nil {
 			// Call the render function with the title, review and the name of the
 			// template
 			render(c, gin.H{
