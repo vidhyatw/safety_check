@@ -56,7 +56,7 @@ func GetReview(c *gin.Context) {
 			// template
 			render(c, gin.H{
 				"title":   review[0].Title,
-				"payload": review}, "review.html")
+				"payload": review}, "index.html")
 
 		} else {
 			// If the review is not found, abort with an error
