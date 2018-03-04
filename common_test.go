@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hackerearth/safetycheck/middleware"
 )
 
 var tmpUserList []user
@@ -26,7 +27,7 @@ func getRouter(withTemplates bool) *gin.Engine {
 	r := gin.Default()
 	if withTemplates {
 		r.LoadHTMLGlob("templates/*")
-		r.Use(setUserStatus())
+		r.Use(middleware.SetUserStatus())
 	}
 	return r
 }

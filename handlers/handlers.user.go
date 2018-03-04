@@ -1,6 +1,6 @@
 // handlers.user.go
 
-package main
+package handlers
 
 import (
 	"math/rand"
@@ -8,28 +8,29 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hackerearth/safetycheck/models"
 )
 
-func showLoginPage(c *gin.Context) {
+func ShowLoginPage(c *gin.Context) {
 	// Call the render function with the name of the template to render
 	render(c, gin.H{
 		"title": "Login",
 	}, "login.html")
 }
 
-func showWriteReviewPage(c *gin.Context) {
+func ShowWriteReviewPage(c *gin.Context) {
 	render(c, gin.H{
 		"title": "Write Review",
 	}, "create-review.html")
 }
 
-func performLogin(c *gin.Context) {
+func PerformLogin(c *gin.Context) {
 	// Obtain the POSTed username and password values
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 
 	// Check if the username/password combination is valid
-	if isUserValid(username, password) {
+	if models.IsUserValid(username, password) {
 		// If the username/password is valid set the token in a cookie
 		token := generateSessionToken()
 		c.SetCookie("token", token, 3600, "", "", false, true)
@@ -54,7 +55,7 @@ func generateSessionToken() string {
 	return strconv.FormatInt(rand.Int63(), 16)
 }
 
-func logout(c *gin.Context) {
+func Logout(c *gin.Context) {
 	// Clear the cookie
 	c.SetCookie("token", "", -1, "", "", false, true)
 
@@ -62,18 +63,18 @@ func logout(c *gin.Context) {
 	c.Redirect(http.StatusTemporaryRedirect, "/")
 }
 
-func showRegistrationPage(c *gin.Context) {
+func ShowRegistrationPage(c *gin.Context) {
 	// Call the render function with the name of the template to render
 	render(c, gin.H{
 		"title": "Register"}, "register.html")
 }
 
-func register(c *gin.Context) {
+func Register(c *gin.Context) {
 	// Obtain the POSTed username and password values
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 
-	if _, err := registerNewUser(username, password); err == nil {
+	if _, err := models.RegisterNewUser(username, password); err == nil {
 		// If the user is created, set the token in a cookie and log the user in
 		token := generateSessionToken()
 		c.SetCookie("token", token, 3600, "", "", false, true)

@@ -1,0 +1,6 @@
+debug
+.idea/
+.talismanignore
+.vscode/
+.DS_Store
+*.iml

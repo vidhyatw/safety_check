@@ -1,6 +1,6 @@
 // models.user.go
 
-package main
+package models
 
 import (
 	"errors"
@@ -25,7 +25,7 @@ var userList = []user{
 }
 
 // Check if the username and password combination is valid
-func isUserValid(username, password string) bool {
+func IsUserValid(username, password string) bool {
 	for _, u := range userList {
 		if u.Username == username && u.Password == password {
 			return true
@@ -36,7 +36,7 @@ func isUserValid(username, password string) bool {
 
 // Register a new user with the given username and password
 // NOTE: For this demo, we
-func registerNewUser(username, password string) (*user, error) {
+func RegisterNewUser(username, password string) (*user, error) {
 	if strings.TrimSpace(password) == "" {
 		return nil, errors.New("The password can't be empty")
 	} else if !isUsernameAvailable(username) {

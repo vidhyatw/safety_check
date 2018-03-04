@@ -1,28 +1,26 @@
-// models.user_test.go
-
-package main
+package models
 
 import "testing"
 
 // Test the validity of different combinations of username/password
 func TestUserValidity(t *testing.T) {
-	if !isUserValid("user1", "pass1") {
+	if !IsUserValid("user1", "pass1") {
 		t.Fail()
 	}
 
-	if isUserValid("user2", "pass1") {
+	if IsUserValid("user2", "pass1") {
 		t.Fail()
 	}
 
-	if isUserValid("user1", "") {
+	if IsUserValid("user1", "") {
 		t.Fail()
 	}
 
-	if isUserValid("", "pass1") {
+	if IsUserValid("", "pass1") {
 		t.Fail()
 	}
 
-	if isUserValid("User1", "pass1") {
+	if IsUserValid("User1", "pass1") {
 		t.Fail()
 	}
 }
@@ -31,7 +29,7 @@ func TestUserValidity(t *testing.T) {
 func TestValidUserRegistration(t *testing.T) {
 	saveLists()
 
-	u, err := registerNewUser("newuser", "newpass")
+	u, err := RegisterNewUser("newuser", "newpass")
 
 	if err != nil || u.Username == "" {
 		t.Fail()
@@ -45,14 +43,14 @@ func TestInvalidUserRegistration(t *testing.T) {
 	saveLists()
 
 	// Try to register a user with a used username
-	u, err := registerNewUser("user1", "pass1")
+	u, err := RegisterNewUser("user1", "pass1")
 
 	if err == nil || u != nil {
 		t.Fail()
 	}
 
 	// Try to register with a blank password
-	u, err = registerNewUser("newuser", "")
+	u, err = RegisterNewUser("newuser", "")
 
 	if err == nil || u != nil {
 		t.Fail()
@@ -76,7 +74,7 @@ func TestUsernameAvailability(t *testing.T) {
 	}
 
 	// Register a new user
-	registerNewUser("newuser", "newpass")
+	RegisterNewUser("newuser", "newpass")
 
 	// This newly registered username should not be available
 	if isUsernameAvailable("newuser") {

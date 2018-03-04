@@ -3,9 +3,9 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/hackerearth/safetycheck/handlers"
+	"github.com/hackerearth/safetycheck/middleware"
 )
 
 var router *gin.Engine
@@ -29,22 +29,57 @@ func main() {
 	router.Run()
 }
 
-// Render one of HTML, JSON or CSV based on the 'Accept' header of the request
-// If the header doesn't specify this, HTML is rendered, provided that
-// the template name is present
-func render(c *gin.Context, data gin.H, templateName string) {
-	loggedInInterface, _ := c.Get("is_logged_in")
-	data["is_logged_in"] = loggedInInterface.(bool)
+func initializeRoutes() {
 
-	switch c.Request.Header.Get("Accept") {
-	case "application/json":
-		// Respond with JSON
-		c.JSON(http.StatusOK, data["payload"])
-	case "application/xml":
-		// Respond with XML
-		c.XML(http.StatusOK, data["payload"])
-	default:
-		// Respond with HTML
-		c.HTML(http.StatusOK, templateName, data)
+	// Use the SetUserStatus middleware for every route to set a flag
+	// indicating whether the request was from an authenticated user or not
+	router.Use(middleware.SetUserStatus())
+
+	// Handle the index route
+	router.GET("/", handlers.ShowIndexPage)
+
+	router.GET("/review/new", handlers.ShowWriteReviewPage)
+
+	// Group user related routes together
+	userRoutes := router.Group("/u")
+	{
+		// Handle the GET requests at /u/login
+		// Show the login page
+		// Ensure that the user is not logged in by using the middleware
+		userRoutes.GET("/login", middleware.EnsureNotLoggedIn(), handlers.ShowLoginPage)
+
+		// Handle POST requests at /u/login
+		// Ensure that the user is not logged in by using the middleware
+		userRoutes.POST("/login", middleware.EnsureNotLoggedIn(), handlers.PerformLogin)
+
+		// Handle GET requests at /u/logout
+		// Ensure that the user is logged in by using the middleware
+		userRoutes.GET("/logout", middleware.EnsureLoggedIn(), handlers.Logout)
+
+		// Handle the GET requests at /u/register
+		// Show the registration page
+		// Ensure that the user is not logged in by using the middleware
+		userRoutes.GET("/register", middleware.EnsureNotLoggedIn(), handlers.ShowRegistrationPage)
+
+		// Handle POST requests at /u/register
+		// Ensure that the user is not logged in by using the middleware
+		userRoutes.POST("/register", middleware.EnsureNotLoggedIn(), handlers.Register)
+	}
+
+	// Group review related routes together
+	reviewRoutes := router.Group("/review")
+	{
+		// Handle GET requests at /review/view/some_review_id
+		reviewRoutes.GET("/view/:placeid/:long/:lat", handlers.GetReview)
+
+		// Handle the GET requests at /review/create
+		// Show the review creation page
+		// Ensure that the user is logged in by using the middleware
+		//reviewRoutes.GET("/create", EnsureLoggedIn(), showreviewCreationPage)
+		reviewRoutes.GET("/create", handlers.ShowReviewCreationPage)
+		// Handle POST requests at /review/create
+		// Ensure that the user is logged in by using the middleware
+		//	reviewRoutes.POST("/create", EnsureLoggedIn(), createreview)
+		reviewRoutes.POST("/create", handlers.CreateReview)
 	}
 }

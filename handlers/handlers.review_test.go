@@ -1,6 +1,6 @@
 // handlers.review_test.go
 
-package main
+package handlers
 
 import (
 	"encoding/json"
@@ -208,7 +208,7 @@ func TestreviewCreationPageAuthenticated(t *testing.T) {
 	http.SetCookie(w, &http.Cookie{Name: "token", Value: "123"})
 
 	// Define the route similar to its definition in the routes file
-	r.GET("/review/create", ensureLoggedIn(), showreviewCreationPage)
+	r.GET("/review/create", EnsureLoggedIn(), showreviewCreationPage)
 
 	// Create a request to send to the above route
 	req, _ := http.NewRequest("GET", "/review/create", nil)
@@ -238,7 +238,7 @@ func TestreviewCreationPageUnauthenticated(t *testing.T) {
 	r := getRouter(true)
 
 	// Define the route similar to its definition in the routes file
-	r.GET("/review/create", ensureLoggedIn(), showreviewCreationPage)
+	r.GET("/review/create", EnsureLoggedIn(), showreviewCreationPage)
 
 	// Create a request to send to the above route
 	req, _ := http.NewRequest("GET", "/review/create", nil)
@@ -262,7 +262,7 @@ func TestreviewCreationAuthenticated(t *testing.T) {
 	http.SetCookie(w, &http.Cookie{Name: "token", Value: "123"})
 
 	// Define the route similar to its definition in the routes file
-	r.POST("/review/create", ensureLoggedIn(), createreview)
+	r.POST("/review/create", EnsureLoggedIn(), createreview)
 
 	// Create a request to send to the above route
 	reviewPayload := getreviewPOSTPayload()
@@ -295,7 +295,7 @@ func TestreviewCreationUnauthenticated(t *testing.T) {
 	r := getRouter(true)
 
 	// Define the route similar to its definition in the routes file
-	r.POST("/review/create", ensureLoggedIn(), createreview)
+	r.POST("/review/create", EnsureLoggedIn(), createreview)
 
 	// Create a request to send to the above route
 	reviewPayload := getreviewPOSTPayload()
