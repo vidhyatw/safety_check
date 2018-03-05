@@ -51,12 +51,13 @@ func GetReview(c *gin.Context) {
 
 	if place, err := createPlaceFromParams(c); err == nil {
 		// Check if the review exists
-		if _, review, err := models.GetReviewsForPlace(place); err == nil {
+		if placeType, review, err := models.GetReviewsForPlace(place); err == nil {
 			// Call the render function with the title, review and the name of the
 			// template
 			render(c, gin.H{
-				"title":   review[0].Title,
-				"payload": review}, "index.html")
+				"title":     review[0].Title,
+				"placeType": placeType,
+				"payload":   review}, "index.html")
 
 		} else {
 			// If the review is not found, abort with an error
@@ -74,7 +75,7 @@ func CreateReview(c *gin.Context) {
 
 	var review models.Review
 
-	if err := c.ShouldBindJSON(&review); err == nil {
+	if err := c.BindJSON(&review); err == nil {
 		if err := models.CreateNewReview(review); err == nil {
 			// If the review is created successfully, show success message
 			render(c, gin.H{
