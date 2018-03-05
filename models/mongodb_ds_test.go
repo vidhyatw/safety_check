@@ -8,7 +8,7 @@ import (
 )
 
 func TestCreateReview(t *testing.T) {
-	mongoDb := newMongoDBDS()
+	mongoDb := newMongoAtlasDBDS()
 	defer mongoDb.mongoSession.Close()
 	if false {
 		place := Place{PlaceID: "ChIJJf4m6glYqDsRh5BROhTjgXE", Type: "Shopping  Mall", Coordinates: []float64{76.9917911, 11.0556083}}
@@ -22,7 +22,7 @@ func TestCreateReview(t *testing.T) {
 }
 
 func TestFindReviewsForPlace(t *testing.T) {
-	mongoDb := newMongoDBDS()
+	mongoDb := newMongoAtlasDBDS()
 	defer mongoDb.mongoSession.Close()
 
 	place := Place{PlaceID: "ChIJJf4m6glYqDsRh5BROhTjgXE", Type: "Shopping  Mall", Coordinates: []float64{76.9917911, 11.0556083}}
@@ -33,7 +33,7 @@ func TestFindReviewsForPlace(t *testing.T) {
 }
 
 func TestFindReviewsForPlace_NearBy(t *testing.T) {
-	mongoDb := newMongoDBDS()
+	mongoDb := newMongoAtlasDBDS()
 	defer mongoDb.mongoSession.Close()
 
 	place := Place{PlaceID: "ChIJGQ6k2QhYqDsRgkxMNsJi8Jw", Type: "Shopping  Mall", Coordinates: []float64{76.9940433, 11.054779}}

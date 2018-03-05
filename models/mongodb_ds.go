@@ -3,28 +3,28 @@ package models
 import (
 	"log"
 
+	"github.com/hackerearth/safetycheck/config"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
 var (
 	collectionName = "reviews"
-	databaseName   = "safetycheck"
-	mongoDBHost    = "localhost"
+	databaseName   = "heroku_38bq7nx5"
 )
 
 type MongoDBDS struct {
 	mongoSession *mgo.Session
 }
 
-func newMongoDBDS() MongoDBDS {
-	cluster := mongoDBHost // mongodb host
-	// connect to mongo
-	session, err := mgo.Dial(cluster)
+func newMongoAtlasDBDS() MongoDBDS {
+	session, err := mgo.Dial(config.GetDatabaseURI())
+
 	if err != nil {
 		log.Fatal("could not connect to db: ", err)
 		panic(err)
 	}
+
 	session.SetMode(mgo.Monotonic, true)
 	return MongoDBDS{session}
 }

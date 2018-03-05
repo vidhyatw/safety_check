@@ -55,7 +55,6 @@ func GetReview(c *gin.Context) {
 			// Call the render function with the title, review and the name of the
 			// template
 			render(c, gin.H{
-				"title":     review[0].Title,
 				"placeType": placeType,
 				"payload":   review}, "index.html")
 

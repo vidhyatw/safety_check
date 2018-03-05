@@ -2,5 +2,6 @@ debug
 .idea/
 .talismanignore
 .vscode/
+vendor/
 .DS_Store
 *.iml

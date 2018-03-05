@@ -15,6 +15,6 @@ func GetDatasource() DBApi {
 	if strings.ToLower(config.GetEnvironment()) == "DEVELOPMENT" {
 		return newTmpFileDS()
 	} else {
-		return newMongoDBDS()
+		return newMongoAtlasDBDS()
 	}
 }

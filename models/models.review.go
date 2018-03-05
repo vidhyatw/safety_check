@@ -1,14 +1,16 @@
 package models
 
+import "gopkg.in/mgo.v2/bson"
+
 type Review struct {
-	ID        int      `json:"_id"`
-	Title     string   `form:"title" json:"title" binding:"omitempty,len=0"`
-	Rating    int      `form:"rating" json:"rating" binding:"required"`
-	Content   string   `form:"content" json:"content" binding:"omitempty,len=0"`
-	TimeStamp string   `form:"timestamp" json:"timestamp" binding:"required"`
-	VisitTime string   `form:"visitTime" json:"visitTime" binding:"required"`
-	Place     Place    `form:"place" json:"place" binding:"required"`
-	Reviewer  Reviewer `form:"reviewer" json:"reviewer" binding:"required"`
+	ID        bson.ObjectId `bson:"_id" json:"id"`
+	Title     string        `form:"title" json:"title" binding:"omitempty,len=0"`
+	Rating    int           `form:"rating" json:"rating" binding:"required"`
+	Content   string        `form:"content" json:"content" binding:"omitempty,len=0"`
+	TimeStamp string        `form:"timestamp" json:"timestamp" binding:"required"`
+	VisitTime string        `form:"visitTime" json:"visitTime" binding:"required"`
+	Place     Place         `form:"place" json:"place" binding:"required"`
+	Reviewer  Reviewer      `form:"reviewer" json:"reviewer" binding:"required"`
 	// Votes     Votes    `form:"user" json:"votes,omitempty" binding:"omitempty,len=0"`
 }
 type Reviewer struct {

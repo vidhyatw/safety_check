@@ -9,10 +9,6 @@ func GetEnvironment() string {
 	return os.Getenv("env")
 }
 
-func GetDatabaseHost() string {
-	return os.Getenv("dbhost")
-}
-
-func GetCollection() string {
-	return os.Getenv("collection")
+func GetDatabaseURI() string {
+	return os.Getenv("MONGODB_URI")
 }
