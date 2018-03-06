@@ -7,3 +7,11 @@
     background-color: #7cced4;
 }
 .bar { fill: steelblue; }
+.button {
+    display: inline-block;
+    padding: 3px 5px;
+    border: 1px solid #000;
+    color: white;
+    font-size: 20px;
+    background-color: #7cced4;
+}

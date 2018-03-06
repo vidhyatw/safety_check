@@ -7,9 +7,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/hackerearth/safetycheck/models"
-
 	"github.com/gin-gonic/gin"
+	"github.com/hackathon/safety_check/models"
 )
 
 func ShowIndexPage(c *gin.Context) {

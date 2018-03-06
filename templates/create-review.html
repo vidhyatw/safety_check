@@ -1,7 +1,7 @@
 <!--create-review.html-->
 
 <!--Embed the header.html template at this location-->
-{{ template "header.html" .}}
+
 
 <h1>Create Review</h1>
 
@@ -14,10 +14,14 @@
       {{.ErrorTitle}}: {{.ErrorMessage}}
     </p>
     {{end}}
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map" class=".create-review"></div> 
     <!--Create a form that POSTs to the `/review/create` route-->
-    <form class="form" action="/review/create" method="POST">
+    <form id="create-review-form" class="form" action="/review/create" method="POST">
+        <div>You are reviewing </div>
+        <div id="reviewLocation"></div>
         Email address:
-        <input name="firstname" type="text">
+        <input name="email" type="text">
         <br><br>
         Time of the day:
         <select name="time">
@@ -32,21 +36,18 @@
       <br><br>
       Rating: 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
+      <div id="rateYo"></div>
+
       <br><br>
       Review:
       <input name="review" type="text" style="height:100px;width:150px">
       <br><br>
-        <button type="button">Submit</button>
+        <button type="button" id="submit-review">Submit</button>
+        <input type="hidden" name="placeId" value="" id="placeId">
+        <input type="hidden" value="0" name="rating" id="rating">
     </form>
   </div>
 </div>  
 
     
 <!--Embed the footer.html template at this location-->
-{{ template "footer.html" .}}

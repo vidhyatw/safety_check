@@ -4,8 +4,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/hackerearth/safetycheck/handlers"
-	"github.com/hackerearth/safetycheck/middleware"
+	"github.com/hackathon/safety_check/handlers"
+	"github.com/hackathon/safety_check/middleware"
 )
 
 var router *gin.Engine
@@ -17,7 +17,7 @@ func main() {
 	// Set the router as the default one provided by Gin
 	router = gin.Default()
 
-	router.Static("/assets", "./assets")
+	//router.Static("/assets", "./assets")
 	// Process the templates at the start so that they don't have to be loaded
 	// from the disk again. This makes serving HTML pages very fast.
 	router.LoadHTMLGlob("templates/*")
@@ -38,7 +38,9 @@ func initializeRoutes() {
 	// Handle the index route
 	router.GET("/", handlers.ShowIndexPage)
 
-	router.GET("/review/new", handlers.ShowWriteReviewPage)
+	router.Static("/assets", "assets/")
+
+	//http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	// Group user related routes together
 	userRoutes := router.Group("/u")
@@ -76,7 +78,7 @@ func initializeRoutes() {
 		// Show the review creation page
 		// Ensure that the user is logged in by using the middleware
 		//reviewRoutes.GET("/create", EnsureLoggedIn(), showreviewCreationPage)
-		reviewRoutes.GET("/create", handlers.ShowReviewCreationPage)
+		reviewRoutes.GET("/create", handlers.ShowWriteReviewPage)
 		// Handle POST requests at /review/create
 		// Ensure that the user is logged in by using the middleware
 		//	reviewRoutes.POST("/create", EnsureLoggedIn(), createreview)

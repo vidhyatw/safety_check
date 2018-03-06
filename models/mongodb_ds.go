@@ -3,7 +3,7 @@ package models
 import (
 	"log"
 
-	"github.com/hackerearth/safetycheck/config"
+	"github.com/hackathon/safety_check/config"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
