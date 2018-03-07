@@ -11,8 +11,21 @@ $("#write_reviews").on("click",(function(event){
 $(document).on("click", "#submit-review", (function(event){
     event.preventDefault();
     var form_data = $("#create-review-form").serializeFormJSON();
-    $.post( "/review/create", form_data, function(data, status){
-
+    var review = {
+        rating: form_data.rating,
+        content: form_data.content,
+        timestamp: new Date().getTime(),
+        visitTime: form_data.visitTime,
+        place: {
+            placeid: form_data.placeId,
+            coordinates: [form_data.lat, form_data.lng]
+        },
+        reviewer: {
+            email: form_data.email
+        }
+    }
+    $.post( "/review/create", review, function(data, status){
+        alert("Hi.")
     } );
 }));
 
@@ -51,5 +64,7 @@ function updateRating() {
 
 $.subscribe('place::changed', function (e, data) {
     $("#placeId").val(data.place_id)
+    $("#lat").val(data.geometry.location.lat())
+    $("#lng").val(data.geometry.location.lng())
     $("#reviewLocation").html(data.formatted_address);
 });

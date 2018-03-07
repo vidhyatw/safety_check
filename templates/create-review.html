@@ -3,7 +3,7 @@
 <!--Embed the header.html template at this location-->
 
 
-<h1>Create Review</h1>
+<font color=#50EBEC><h1>Create Review</h1></font>
 
 
 <div class="panel panel-default col-sm-12">
@@ -17,14 +17,16 @@
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
     <div id="map" class=".create-review"></div> 
     <!--Create a form that POSTs to the `/review/create` route-->
-    <form id="create-review-form" class="form" action="/review/create" method="POST">
-        <div>You are reviewing </div>
-        <div id="reviewLocation"></div>
+    <div class="review-submit">
+    <form id="create-review-form" style="color:chocolate" action="/review/create" method="POST">
+      <div style="margin-left:5px">
+        <span>You are reviewing:  </span> 
+        <div id="reviewLocation" style="overflow-x:scroll"></div>
         Email address:
         <input name="email" type="text">
         <br><br>
         Time of the day:
-        <select name="time">
+        <select name="visitTime">
         <option value="12">12</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -40,12 +42,19 @@
 
       <br><br>
       Review:
-      <input name="review" type="text" style="height:100px;width:150px">
+      <textarea rows="4" cols="50" name="content"></textarea>
       <br><br>
         <button type="button" id="submit-review">Submit</button>
-        <input type="hidden" name="placeId" value="" id="placeId">
+        <fieldset name="place">
+          <input type="hidden" name="placeId" value="" id="placeId">
+          <input type="hidden" name="lat" value="" id="lat">
+          <input type="hidden" name="lng" value="" id="lng">
+        </fieldset>
+        
         <input type="hidden" value="0" name="rating" id="rating">
-    </form>
+      </div>
+      </form>
+  </div>
   </div>
 </div>  
 

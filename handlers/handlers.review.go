@@ -3,7 +3,9 @@
 package handlers
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -70,8 +72,11 @@ func GetReview(c *gin.Context) {
 
 func CreateReview(c *gin.Context) {
 	// Obtain the POSTed title and content values
-
+	fmt.Printf("Hiiiiiiiii")
 	var review models.Review
+
+	req, _ := json.Marshal(c.Request)
+	fmt.Printf("check now: ", string(req))
 
 	if err := c.BindJSON(&review); err == nil {
 		if err := models.CreateNewReview(review); err == nil {

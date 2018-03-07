@@ -15,3 +15,10 @@
     font-size: 20px;
     background-color: #7cced4;
 }
+.review-submit{
+    overflow-y: scroll;
+    height: 500px;
+    overflow-x: scroll;
+    width: 400px;
+    margin-left: 10px;
+}
