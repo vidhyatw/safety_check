@@ -1,0 +1,12 @@
+<div class="review-display">
+  <!--Loop over the `payload` variable, which is the list of review-->
+  {{range .payload }}
+    <!--Create the link for the review based on its ID-->
+    <div>
+        <h2>{{.Title}}</h2>
+      <p>{{.Content}}</p>
+    </div>
+
+  {{end}}
+</div>
+<script src="assets/javascript/slick_ui.js"></script>

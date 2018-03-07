@@ -40,6 +40,8 @@ func initializeRoutes() {
 
 	router.Static("/assets", "assets/")
 
+	router.Static("/slick", "slick/")
+
 	//http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	// Group user related routes together

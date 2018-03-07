@@ -16,9 +16,10 @@
     {{end}}
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
     <div id="map" class=".create-review"></div> 
+    </div>
     <!--Create a form that POSTs to the `/review/create` route-->
-    <div class="review-submit">
-    <form id="create-review-form" style="color:chocolate" action="/review/create" method="POST">
+    <div style="float: right" class="review-submit">
+    <!-- <form id="create-review-form" style="color:chocolate" action="/review/create" method="POST">
       <div style="margin-left:5px">
         <span>You are reviewing:  </span> 
         <div id="reviewLocation" style="overflow-x:scroll"></div>
@@ -37,7 +38,6 @@
       </select>
       <br><br>
       Rating: 
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <div id="rateYo"></div>
 
       <br><br>
@@ -53,9 +53,56 @@
         
         <input type="hidden" value="0" name="rating" id="rating">
       </div>
-      </form>
-  </div>
-  </div>
+      </form> -->
+
+      <form action="/review/create" id="create-review-form" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin">
+        <h2 class="w3-center"></h2>
+         
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fas fa-map-marker-alt"></i></div>
+            <div class="w3-rest">
+              <div id="reviewLocation">Location is here.. Let us have good big location to check how it accomodates.!!!!!!!!!!!!! Random Random and more random</div>
+            </div>
+        </div>
+        
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa far fa-envelope"></i></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" name="email" type="text" placeholder="Email">
+            </div>
+        </div>
+        
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge far fa-clock"></i></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" name="visitTime" type="text" placeholder="Time of the day">
+            </div>
+        </div>
+        
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge far fa-star-half"></i></div>
+            <div class="w3-rest">
+                <div id="rateYo"></div>
+            </div>
+        </div>
+        
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fas fa-pencil-alt"></i></div>
+            <div class="w3-rest">
+              <input class="w3-input w3-border" name="content" type="text" placeholder="Review Content">
+            </div>
+        </div>
+        
+        <p class="w3-center">
+        <button id="submit-review" class="w3-button w3-section w3-blue w3-ripple"> Submit </button>
+        </p>
+        <input type="hidden" name="placeId" value="" id="placeId">
+          <input type="hidden" name="lat" value="" id="lat">
+          <input type="hidden" name="lng" value="" id="lng">
+          <input type="hidden" value="0" name="rating" id="rating">
+        </form>
+ </div>
+  <!--  </div> -->
 </div>  
 
     

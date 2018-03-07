@@ -29,6 +29,7 @@ $(document).on("click", "#submit-review", (function(event){
     } );
 }));
 
+
 $(document).on("rateyo.set", "#rateYo", (function (e, data) {
     $("#rating").val(data.rating);
 }));
@@ -61,10 +62,19 @@ function updateRating() {
    
   };
 
+  function getReviews(placeData) {
+    //   var url = "/view/" + placeData.place_id + "/" + placeData.geometry.location.lat() + "/" 
+    //   + placeData.geometry.location.lng()
+    var url = "/review/view/ChIJGQ6k2QhYqDsRgkxMNsJi8Jw/76.9940433/11.054779"
+    $.get(url, function(data) {
+        $("#review-section").html(data);
+    })
+  }
 
 $.subscribe('place::changed', function (e, data) {
     $("#placeId").val(data.place_id)
     $("#lat").val(data.geometry.location.lat())
     $("#lng").val(data.geometry.location.lng())
     $("#reviewLocation").html(data.formatted_address);
+    getReviews(data);
 });
