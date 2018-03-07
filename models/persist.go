@@ -3,7 +3,7 @@ package models
 import (
 	"strings"
 
-	"github.com/hackathon/safety_check/config"
+	"github.com/hackerearth/safety_check/config"
 )
 
 type DBApi interface {

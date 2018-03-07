@@ -4,8 +4,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/hackathon/safety_check/handlers"
-	"github.com/hackathon/safety_check/middleware"
+	"github.com/hackerearth/safety_check/handlers"
+	"github.com/hackerearth/safety_check/middleware"
 )
 
 var router *gin.Engine

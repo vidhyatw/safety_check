@@ -8,7 +8,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hackathon/safety_check/models"
+	"github.com/hackerearth/safety_check/models"
 )
 
 func ShowLoginPage(c *gin.Context) {
