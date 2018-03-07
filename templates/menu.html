@@ -1,4 +1,6 @@
 <!--menu.html-->
+<input type="hidden" id="fb-app-id" value= {{ .fb_appId}}></input>
+<script src="assets/javascript/fb.js"></script>
 
 <nav class="navbar navbar-default">
   <div class="container">
@@ -7,23 +9,24 @@
         Home
       </a>
     </div>
-    <ul class="nav navbar-nav">
-      {{ if .is_logged_in }}
-        <!--Display this link only when the user is logged in-->
-        <li><a href="/review/create">Create Review</a></li>
-      {{end}} 
-      {{ if not .is_logged_in }}
+    <div class="login-status" id="login_status"></div>
+    <div class="nav navbar-nav login">
+        {{ if not .is_logged_in }}
         <!--Display this link only when the user is not logged in-->
-        <li><a href="/u/register">Register</a></li>
-      {{end}} 
-      {{ if not .is_logged_in }}
-        <!--Display this link only when the user is not logged in-->
-        <li><a href="/u/login">Login</a></li>
-      {{end}} 
-      {{ if .is_logged_in }}
-        <!--Display this link only when the user is logged in-->
-        <li><a href="/u/logout">Logout</a></li>
+        <fb:login-button scope="public_profile,email" id="login" onlogin="checkLoginState();"></fb:login-button> 
       {{end}}
-    </ul>
+      {{ if .is_logged_in }}
+      <!--Display this link only when the user is not logged in-->
+      
+    {{end}}  
+    </div>
+    <button type="button" class="button_style1 logout" style="display: none" id="logout">Log Out</button>
   </div>
+
+<!--
+  Below we include the Login Button social plugin. This button uses
+  the JavaScript SDK to present a graphical Login button that triggers
+  the FB.login() function when clicked.
+-->
+
 </nav>

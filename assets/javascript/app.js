@@ -15,7 +15,7 @@ $(document).on("click", "#submit-review", (function(event){
         rating: form_data.rating,
         content: form_data.content,
         timestamp: new Date().getTime(),
-        visitTime: form_data.visitTime,
+        visittime: form_data.visitTime,
         place: {
             placeid: form_data.placeId,
             coordinates: [form_data.lat, form_data.lng]

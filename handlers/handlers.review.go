@@ -10,6 +10,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hackathon/safety_check/config"
 	"github.com/hackathon/safety_check/models"
 )
 
@@ -20,7 +21,9 @@ func ShowIndexPage(c *gin.Context) {
 	// render(c, gin.H{
 	// 	"title":   "Home Page",
 	// 	"payload": reviews}, "index.html")
-	render(c, gin.H{}, "landing-page.html")
+	fmt.Printf("fb app id: ", config.GetFacebookApp())
+	render(c, gin.H{
+		"fb_appId": config.GetFacebookApp()}, "landing-page.html")
 }
 
 func ShowReviewCreationPage(c *gin.Context) {
