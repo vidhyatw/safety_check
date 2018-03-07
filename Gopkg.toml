@@ -21,7 +21,7 @@
 #  version = "2.4.0"
 
 [metadata.heroku]
-  root-package = "github.com/hackerearth/safetycheck"
+  root-package = "github.com/hackerearth/safety_check"
 
 [[constraint]]
   name = "github.com/gin-gonic/gin"
