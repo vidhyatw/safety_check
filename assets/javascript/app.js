@@ -1,5 +1,3 @@
-var place_details;
-
 $("#write_reviews").on("click",(function(event){
     event.preventDefault();
     $.get("/review/create", function(data, status){
