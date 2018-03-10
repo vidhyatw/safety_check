@@ -85,5 +85,7 @@ func initializeRoutes() {
 		// Ensure that the user is logged in by using the middleware
 		//	reviewRoutes.POST("/create", EnsureLoggedIn(), createreview)
 		reviewRoutes.POST("/create", handlers.CreateReview)
+
+		reviewRoutes.GET("/score/:placeid/:long/:lat", handlers.GetSafetyScore)
 	}
 }

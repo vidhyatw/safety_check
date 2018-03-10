@@ -16,9 +16,12 @@
     </div>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
     <div id="map"></div> 
-    <div id="graph" class="graph"></div>
+    <div id="graph" class="graph">
+        <canvas id="myChart" width="550" height="550"></canvas>
+    </div>
     <div id="review-section"></div>
 </div>
+<input id="current_page" type="hidden" value= {{ .CurrentPage}} ></input>
 
 
 
