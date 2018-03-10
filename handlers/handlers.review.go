@@ -3,9 +3,9 @@
 package handlers
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -75,24 +75,22 @@ func GetReview(c *gin.Context) {
 
 func CreateReview(c *gin.Context) {
 	// Obtain the POSTed title and content values
-	fmt.Printf("Hiiiiiiiii")
+
 	var review models.Review
+	err := c.BindJSON(&review)
+	log.Println("Review Json is ", review)
 
-	req, _ := json.Marshal(c.Request)
-	fmt.Printf("check now: ", string(req))
-
-	if err := c.BindJSON(&review); err == nil {
-		if err := models.CreateNewReview(review); err == nil {
-			// If the review is created successfully, show success message
-			render(c, gin.H{
-				"title": "Submission Successful",
-			}, "submission-successful.html")
-		} else {
-			// if there was an error while creating the review, abort with an error
-			c.AbortWithStatus(http.StatusBadRequest)
-		}
-
-	} else {
-
+	if err != nil {
+		c.AbortWithError(http.StatusBadRequest, err)
 	}
+	if err = models.CreateNewReview(review); err == nil {
+		// If the review is created successfully, show success message
+		render(c, gin.H{
+			"title": "Submission Successful",
+		}, "submission-successful.html")
+	} else {
+		// if there was an error while creating the review, abort with an error
+		c.AbortWithError(http.StatusBadRequest, err)
+	}
+
 }

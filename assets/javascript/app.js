@@ -12,20 +12,20 @@ $(document).on("click", "#submit-review", (function(event){
     event.preventDefault();
     var form_data = $("#create-review-form").serializeFormJSON();
     var review = {
-        rating: form_data.rating,
+        rating: parseFloat(form_data.rating),
         content: form_data.content,
         timestamp: new Date().getTime(),
-        visittime: form_data.visitTime,
+        visitTime: form_data.visitTime,
         place: {
             placeid: form_data.placeId,
-            coordinates: [form_data.lat, form_data.lng]
+            coordinates: [parseFloat(form_data.lng), parseFloat(form_data.lat)]
         },
         reviewer: {
             email: form_data.email
         }
     }
-    $.post( "/review/create", review, function(data, status){
-        alert("Hi.")
+
+    $.post( "/review/create", JSON.stringify (review), function(data, status){
     } );
 }));
 
