@@ -63,18 +63,28 @@ function updateRating() {
   };
 
   function getReviews(placeData) {
-    //   var url = "/view/" + placeData.place_id + "/" + placeData.geometry.location.lat() + "/" 
-    //   + placeData.geometry.location.lng()
+      var url = "/view/" + placeData.place_id + "/" + placeData.geometry.location.lat() + "/" 
+      + placeData.geometry.location.lng()
     var url = "/review/view/ChIJGQ6k2QhYqDsRgkxMNsJi8Jw/76.9940433/11.054779"
     $.get(url, function(data) {
         $("#review-section").html(data);
     })
   }
 
+  function getSafetyScores(placeData) {
+    var url = "/review/score/ChIJGQ6k2QhYqDsRgkxMNsJi8Jw/76.9940433/11.054779"
+    $.get(url, function(data) {
+        renderSafetyScoreGraph(data)
+    })
+  } 
+
 $.subscribe('place::changed', function (e, data) {
     $("#placeId").val(data.place_id)
     $("#lat").val(data.geometry.location.lat())
     $("#lng").val(data.geometry.location.lng())
     $("#reviewLocation").html(data.formatted_address);
-    getReviews(data);
+    if($("#current_page").val() == "home") {
+        getReviews(data);
+        getSafetyScores(data);
+    } 
 });

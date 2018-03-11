@@ -14,11 +14,14 @@
     <button type="button" class="button_style1" id="write_reviews">Write Reviews</button>
     <button type="button" class="button_style1" onclick="alert('Hello world!')">Signup</button>
     </div>
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box"></input>
     <div id="map"></div> 
-    <div id="graph" class="graph"></div>
+    <div id="graph" class="graph">
+        <canvas id="myChart" width="550" height="550"></canvas>
+    </div>
     <div id="review-section"></div>
 </div>
+<input id="current_page" type="hidden" value= {{ .CurrentPage}} ></input>
 
 
 
