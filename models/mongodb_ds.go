@@ -64,6 +64,19 @@ func (mongoDS MongoDBDS) FindReviewsForNearByPlace(place Place) (string, []Revie
 	var reviews []Review
 	long := place.Coordinates[0]
 	lat := place.Coordinates[1]
-	err := c.Find(bson.M{"place.coordinates": bson.M{"$near": []float64{long, lat}, "$maxDistance": 2000}}).All(&reviews)
+	scope := 2000
+	err := c.Find(bson.M{
+		"place.coordinates": bson.M{
+			"$nearSphere": bson.M{
+				"$geometry": bson.M{
+					"type":        "Point",
+					"coordinates": []float64{long, lat},
+				},
+				"$maxDistance": scope,
+			},
+		},
+	}).All(&reviews)
+
+	// err := c.Find(bson.M{"place.coordinates": bson.M{"$near": []float64{long, lat}, "$maxDistance": 2000}}).All(&reviews)
 	return "NEARBY", reviews, err
 }
