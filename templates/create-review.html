@@ -28,13 +28,18 @@
         <br><br>
         Time of the day:
         <select name="visitTime">
-        <option value="12">12</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="5">5</option>
         <option value="6">6</option>
+        <option value="7">6</option>
+        <option value="8">6</option>
+        <option value="9">6</option>
+        <option value="10">6</option>
+        <option value="11">6</option>
+        <option value="12">6</option>
       </select>
       <br><br>
       Rating: 
@@ -68,19 +73,39 @@
         <div class="w3-row w3-section">
           <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa far fa-envelope"></i></div>
             <div class="w3-rest">
-              <input class="w3-input w3-border" name="email" type="text" placeholder="Email">
+              <input class="w3-input w3-border" name="email" type="email" placeholder="Email" required>
             </div>
         </div>
         
         <div class="w3-row w3-section">
           <div class="w3-col" style="width:50px"><i class="w3-xxlarge far fa-clock"></i></div>
             <div class="w3-rest">
-              <input class="w3-input w3-border" name="visitTime" type="text" placeholder="Time of the day">
+              Time of the day:
+              <select class="w3-input w3-border time_dropdown" name="visitTime" type="text" placeholder="Time of the day" required>
+                <option value="" disabled selected>hour</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+              <select class="w3-input w3-border" name="am/pm" type="text" placeholder="AM/PM" required>
+                <option value="" disabled selected>AM/PM</option>
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
             </div>
         </div>
         
         <div class="w3-row w3-section">
-          <div class="w3-col" style="width:50px"><i class="w3-xxlarge far fa-star-half"></i></div>
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge far fa-star-half" required></i></div>
             <div class="w3-rest">
                 <div id="rateYo"></div>
             </div>
@@ -89,7 +114,7 @@
         <div class="w3-row w3-section">
           <div class="w3-col" style="width:50px"><i class="w3-xxlarge fas fa-pencil-alt"></i></div>
             <div class="w3-rest">
-              <input class="w3-input w3-border" name="content" type="text" placeholder="Review Content">
+              <input class="w3-input w3-border" name="content" type="text" placeholder="Review Content" required>
             </div>
         </div>
         
