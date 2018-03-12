@@ -16,6 +16,7 @@ function statusChangeCallback(response) {
     }
   }
 
+
   // This function is called when someone finishes with the Login
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
@@ -78,15 +79,22 @@ function statusChangeCallback(response) {
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
+    FB.api('/me', { locale: 'en_US', fields: 'name,email,gender' }, function(response) {
       debugger;
       sessionStorage.setItem("login",true)
+      sessionStorage.setItem("reviewer_name",response.name)
+      sessionStorage.setItem("reviewer_gender",response.gender)
+      sessionStorage.setItem("reviewer_email",response.email)
+
       $("#logout").show()
       $("#login").hide()
       console.log('Successful login for: ' + response.name);
+      
       document.getElementById('login_status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
   }
 
+  
 
+  
