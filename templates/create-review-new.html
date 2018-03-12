@@ -1,5 +1,6 @@
 
 <div class="parallax-window" data-parallax="scroll" data-image-src="/static/img/bg-img-01.jpg">
+  <div id="submit-status" style="display: none;"></div>
     <section style="margin-bottom: auto" class="container tm-page-1-content split">
       <div class="sub-header style-bold">
           Pick a place on the map to write review
@@ -29,7 +30,7 @@
                             <div class="contact_message">  
                                 <form style="width: 500px;" action="/review/create" id="create-review-form" method="post" class="contact-form">
                                         <div class="form-group">
-                                            <div id="reviewLocation">Location is here.. Let us have good big location to check how it accomodates.!!!!!!!!!!!!! Random Random and more random</div>
+                                            <div id="reviewLocation"></div>
                                         </div>
                                         <div class="form-group">
                                           <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>

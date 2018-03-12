@@ -4,8 +4,9 @@ $("#write_reviews").on("click",(function(event){
     $.get("/review/create", function(data, status){
         $( "#content" ).html( data )
         initAutocomplete()
+        toggle_buttons()
         updateRating()
-        window.history.pushState({urlPath:'#/review/create'},"",'/review/create')
+        //window.history.pushState({urlPath:'#/review/create'},"",'/review/create')
     });
 } else {
    alert("Please log in to write reviews!");
@@ -34,6 +35,16 @@ $(document).on("click", "#submit-review", (function(event){
     }
 
     $.post( "/review/create", JSON.stringify (review), function(data, status){
+        // if(status == "success") {
+        //     $("#submit-status").html("Submission Successful")
+        //     $("#submit-status").show();
+        // } else {
+        //     $("#submit-status").html("Submission failed!")
+        //     $("#submit-status").show();
+        // }
+        if(status == "success") {
+        alert("Review submitted successfully")
+        }
     } );
 }));
 
@@ -99,3 +110,14 @@ $.subscribe('place::changed', function (e, data) {
         getSafetyScores(data);
     } 
 });
+
+function toggle_buttons(){
+    if($("#current_page").val() == "home") {
+        $("#home").hide();
+        $("#write_reviews").show();
+    } else {
+        $("#write_reviews").hide();
+        $("#home").show();
+    }
+};
+$(document).ready(toggle_buttons())
