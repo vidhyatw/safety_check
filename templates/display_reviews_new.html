@@ -1,0 +1,12 @@
+
+<!-- <div class="review-display"> -->
+        <!--Loop over the `payload` variable, which is the list of review-->
+        {{range .payload }}
+          <!--Create the link for the review based on its ID-->
+        <article  class="col-xs-6 col-md-4 tm-bg-white-transparent">
+                <header><h3>{{.Title}}</h3></header>
+                <p>{{.Content}}</p>
+        </article>
+      
+        {{end}}
+<!-- </div> -->

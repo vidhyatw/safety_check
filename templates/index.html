@@ -1,18 +1,320 @@
-<!--index.html-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--Embed the header.html template at this location-->
-{{ template "header.html" .}}
+  <title>Safety Check</title>
+<!--
 
-  <!--Loop over the `payload` variable, which is the list of review-->
-  {{range .payload }}
-    <!--Create the link for the review based on its ID-->
-    <a href="/review/view/{{.ID}}">
-      <!--Display the title of the review -->
-      <h2>{{.Title}}</h2>
-    </a>
-    <!--Display the content of the review-->
-    <p>{{.Content}}</p>
-  {{end}}
+Template 2096 Individual
 
-<!--Embed the footer.html template at this location-->
-{{ template "footer.html" .}}
+http://www.tooplate.com/view/2096-individual
+
+-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="/static/font-awesome-4.5.0/css/font-awesome.min.css">                <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/slick/slick-theme.css"/>
+  <link rel="stylesheet" href="/static/css/tooplate-style.css"><!-- tooplate style -->
+  <!-- Magnific Popup core CSS file -->
+  <link rel="stylesheet" href="/static/css/magnific-popup.css">
+
+  <!-- App related -->
+  <link rel="stylesheet" type="text/css" href="/assets/css/map.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/rating.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
+
+      </head>
+
+      <body>
+        
+        <!-- <div class="topnav">
+            <button type="button" class="button_style1" id="write_reviews">Write Reviews</button>
+            <button type="button" class="button_style1" onclick="alert('Hello world!')">Signup</button>
+            <a style="color:#de1dcc" class="active" href="#home">Home</a>
+          </div> -->
+          {{ template "menu.html" .}}
+        <div id="content">
+            <input id="current_page" type="hidden" value= {{ .CurrentPage}} ></input>
+        <div class="parallax-window" data-parallax="scroll" data-image-src="/static/img/bg-img-01.jpg">
+          <section class="container tm-page-1-content">
+            <div class="row">
+              <div class="col-md-6 ml-auto tm-text-white">
+                <header><h1>Individual</h1></header>
+                <p>Mauris nec urna facilisis, sagittis libero at, hendrerit est. Maecenas et ligula sed justo scelerisque placerat sit amet eget tellus. Mauris dolor purus, pharetra sed velit id, tempus maximus nunc. Aenean eleifend id odio id semper. Nam at pellentesque ipsum.</p>
+                
+                  <a href="#view_safety_index" class="btn btn-danger">Explore...</a>
+              </div>
+            </div>
+
+          </section>
+        </div>
+
+        <div id="view_safety_index" class="parallax-window" data-parallax="scroll" data-image-src="/static/img/download_image_4.jpg">
+          <section style="margin-bottom: auto" class="container tm-page-1-content split">
+            <div class="sub-header style-bold">
+                Pick a place on the map to check scores
+            </div>
+            <div class="row">
+              <div class="col-md-6 ml-auto">
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box"></input>
+                <div id="map"></div> 
+              </div>
+            </div>
+
+          </section>
+          <section class="container tm-page-1-content split">
+              <div id="reviewLocation" class="sub-header">
+              </div>
+              <br>
+            <div class="row">
+              <div class="col-md-6 ml-auto">
+                <div id="graph" class="graph">
+                  <canvas id="myChart" width="550" height="450"></canvas>
+              </div>
+              <a id="read_review" href="#tm-section-4" style="float: right; display: none;" class="btn btn-danger">Read Reviews...</a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+
+        <div id="tm-section-2" class="parallax-window" data-parallax="scroll" data-image-src="/static/img/bg-img-02.jpg">
+          <section class="container tm-page-1-content tm-page-2">
+            <div class="row">
+              <article class="col-md-6 tm-article tm-bg-white-transparent">
+                <header><h2 >Left Column</h2></header>
+                <b>Donec id augue ac risus faucibus elementum. Quisque tincidunt, sapien et tincidunt suscipit, diam ipsum iaculis augue, nec semper orci ex a arcu. Donec efficitur sem sed ligula mollis.</b>
+              </article>
+
+              <article class="col-md-6 tm-article tm-bg-white-transparent">
+                <header><h2>Right Column</h2></header>
+                <b>Donec id augue ac risus faucibus elementum. Quisque tincidunt, sapien et tincidunt suscipit, diam ipsum iaculis augue, nec semper orci ex a arcu. Duis commodo orci libero.</b>
+                
+                  <a href="#tm-section-3" class="btn btn-danger ml-auto mr-0 tm-btn-block">Details...</a>
+              </article>
+            </div>
+          </section>
+        </div>
+        <div id="tm-section-3" class="parallax-window" data-parallax="scroll" data-image-src="/static/img/bg-img-03.jpg">
+          <section class="container tm-page-1-content">
+            <div class="row1">
+              <div class="col-xl-6 col-md-8 ml-auto">
+                <article class="tm-bg-white-transparent-page3">
+                  <header><h5 class="tm-bg-white">Individual HTML5 Web Template</h5></header>
+                  <p class="tm-bg-white2">Do you like this template? Please tell your friends about Tooplate website. Thank you. Praesent scelerisque erat placerat tempus laoreet. Vivamus pellentesque tempor congue. Vestibulum ac diam dui. Vivamus a fringilla velit. Proin mauris enim.</p>
+                    <a href="#tm-section-4" class="btn btn-danger tm-btn-right">Read More</a>
+                </article>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="tm-section-4" class="parallax-window" data-parallax="scroll" data-image-src="/static/img/bg-img-04.jpg">
+
+          <div id="review-section" style="width: 100%; text-align: center;" class="row">
+            <article  class="col-xs-6 col-md-4 tm-bg-white-transparent">
+              <header><h3>Nunc sagittis</h3></header>
+              <p>Orci varius natoque penatibus et  magnis dis parturient montes, nascetur ridiculus mus. Praesent vel est varius nisi posuere aliquet. Aliquam luctus, dolor vel euismod scelerisque, sem mi commodo nisi.</p>
+            </article>
+            <article  class="col-xs-6 col-md-4 tm-bg-white-transparent">
+              <header><h3>Nunc sagittis</h3></header>
+              <p>Orci varius natoque penatibus et  magnis dis parturient montes, nascetur ridiculus mus. Praesent vel est varius nisi posuere aliquet. Aliquam luctus, dolor vel euismod scelerisque, sem mi commodo nisi.</p>
+            </article>
+            <article class="col-xs-6 col-md-4 tm-bg-white-transparent">
+              <header><h3>Duis euismod</h3></header>
+              <p>Orci varius natoque penatibus et  magnis dis parturient montes, nascetur ridiculus mus. Praesent vel est varius nisi posuere aliquet. Aliquam luctus, dolor vel euismod scelerisque, sem mi commodo nisi.</p>
+            </article>
+            <article class="col-xs-6 col-md-4 tm-bg-white-transparent">
+              <header><h3>Ipsum vitae mattis</h3></header>
+              <p>Orci varius natoque penatibus et  magnis dis parturient montes, nascetur ridiculus mus. Praesent vel est varius nisi posuere aliquet. Aliquam luctus, sem mi commodo nisi.</p>
+            </article>
+          </div>
+        </div>
+        <div class="parallax-window" data-parallax="scroll" data-image-src="/static/img/bg-img-05.jpg">
+          <div class="container">
+            <div class="row">
+              <div class="tm-img-container">
+                <div class="tm-img-slider">
+
+                    <a class="image-link" href="img/gallery-img-01.jpg"><img src="/static/img/gallery-img-01-tn.jpg" alt="Image" class="tm-slider-img"></a>
+                    <a class="image-link" href="img/gallery-img-02.jpg"><img src="/static/img/gallery-img-02-tn.jpg" alt="Image" class="tm-slider-img"></a>
+                    <a class="image-link" href="img/gallery-img-03.jpg"><img src="/static/img/gallery-img-03-tn.jpg" alt="Image" class="tm-slider-img"></a>  
+                    <a class="image-link" href="img/gallery-img-04.jpg"><img src="/static/img/gallery-img-04-tn.jpg" alt="Image" class="tm-slider-img"></a>
+                    <a class="image-link" href="img/gallery-img-05.jpg"><img src="/static/img/gallery-img-05-tn.jpg" alt="Image" class="tm-slider-img"></a>
+                    <a class="image-link" href="img/gallery-img-06.jpg"><img src="/static/img/gallery-img-06-tn.jpg" alt="Image" class="tm-slider-img"></a>
+                      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="parallax-window tm-position-relative tm-form-section" data-parallax="scroll" data-image-src="/static/img/bg-img-06.jpg">
+          <div class="container ">
+            <div class="row1 ">
+              <div class="col-xs-12">
+                <header><h5>Contact Us</h5></header>
+              </div>
+            </div>
+            <div class="row tm-page-5-content">
+              <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="contact_message">                  
+                  <form action="#contact" method="post" class="contact-form">
+                    <div class="form-group">
+                      <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
+                    </div>
+                    <div class="form-group">
+                      <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
+                    </div>
+                    <div class="form-group">
+                      <textarea id="contact_message" name="contact_message" class="form-control" rows="9" placeholder="Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger tm-btn-submit">Submit</button>
+                  </form>
+                </div>
+              </div>
+              <div class="col-lg-8 col-md-6 col-xs-12">
+                <div class="tm-address-box">
+                  <p>Integer pretium volutpat tempor. Maecenas condimentum tincidunt leo. Paesent scelerisque erat placerat tempus laoreet. Vivamus pellentesque tempor congue. Vestibulum ac diam dui. Vivamus a fringilla velit.
+                  </p>
+                  <br>
+                  <address>
+                    <b>Our Address</b><br>
+                    <br>
+                    120-240 Proin mauris enim,<br>
+                    dignissim sit amet ligula id,<br>
+                    finibus tempus erat 10200
+                  </address>
+                </div>
+              </div>
+            </div>
+            <div class="footer">
+              <p>Copyright © 2018 Your Company
+                . Design: <a href="http://www.tooplate.com" target="_parent">Tooplate</a></p>
+              </div>
+            </div>
+            
+          </div>
+
+
+          <div id="write-review" class="parallax-window tm-position-relative tm-form-section" data-parallax="scroll" data-image-src="/static/img/bg-img-06.jpg">
+            <div class="container ">
+              <div class="row1 ">
+                <div class="col-xs-12">
+                  <header><h5>Contact Us</h5></header>
+                </div>
+              </div>
+              <div class="row tm-page-5-content">
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                  <div class="contact_message">                  
+                    <form action="#contact" method="post" class="contact-form">
+                      <div class="form-group">
+                        <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
+                      </div>
+                      <div class="form-group">
+                        <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
+                      </div>
+                      <div class="form-group">
+                        <textarea id="contact_message" name="contact_message" class="form-control" rows="9" placeholder="Message" required></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-danger tm-btn-submit">Submit</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-lg-8 col-md-6 col-xs-12">
+                  <div class="tm-address-box">
+                    <p>Integer pretium volutpat tempor. Maecenas condimentum tincidunt leo. Paesent scelerisque erat placerat tempus laoreet. Vivamus pellentesque tempor congue. Vestibulum ac diam dui. Vivamus a fringilla velit.
+                    </p>
+                    <br>
+                    <address>
+                      <b>Our Address</b><br>
+                      <br>
+                      120-240 Proin mauris enim,<br>
+                      dignissim sit amet ligula id,<br>
+                      finibus tempus erat 10200
+                    </address>
+                  </div>
+                </div>
+              </div>
+              <div class="footer">
+                <p>Copyright © 2018 Your Company
+                  . Design: <a href="http://www.tooplate.com" target="_parent">Tooplate</a></p>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <!-- load JS files -->
+          <script src="/static/js/jquery-1.11.3.min.js"></script>        <!-- jQuery (https://jquery.com/download/) -->
+          <script src="/static/js/parallax.min.js"></script>
+     
+          <script type="text/javascript" src="/static/slick/slick.min.js"></script> 
+          <!-- Slick Carousel -->
+
+          <!-- Magnific Popup core JS file -->
+          <script src="/static/js/jquery.magnific-popup.min.js"></script>
+
+
+           <!-- App related-->
+          <script src="/assets/javascript/ba-tiny-pubsub.min.js"></script>
+          <script type="text/javascript" defer src="/assets/javascript/app_new.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+          <script type="text/javascript" src="/assets/javascript/map.js"></script>
+          <script src="/assets/javascript/chart.js"></script>
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoG4zZiwbQ0sdJFIck3q5BHfnD1yY58fA&libraries=places&callback=initAutocomplete"
+    async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+          
+
+          <script>
+
+            function setCarousel() {
+
+              var slider = $('.tm-img-slider');
+
+              if (slider.hasClass('slick-initialized')) {
+                slider.slick('destroy');
+              }
+
+              if($(window).width() > 991){
+                  // Slick carousel
+                  slider.slick({
+                    dots: true,
+                    infinite: true,
+                    slidesToShow: 4,
+                    slidesToScroll: 1
+                  });
+                }
+                else {
+                 slider.slick({
+                  dots: true,
+                  infinite: true,
+                  slidesToShow: 2,
+                  slidesToScroll: 1
+                });
+               }
+             }
+
+             $(document).ready(function(){
+
+              setCarousel();
+              $('.tm-img-slider').magnificPopup({
+                delegate: 'a', // child items selector, by clicking on it popup will open
+                type: 'image'
+                // other options
+
+              });
+
+              $(window).resize(function() {
+                setCarousel();
+              });
+            });
+
+          </script>
+        </body>
+        </html>

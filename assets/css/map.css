@@ -3,7 +3,7 @@
       #map {
       height: 500px;
       width: 500px;
-      float: left;
+      float: right;
       }
       .graph{
         float: right;
@@ -83,4 +83,13 @@
       }
       #target {
         width: 345px;
+      }
+      .sub-header{
+        color: 'black';
+        text-align: center;
+      }
+      .style-bold{
+        text-align: right;
+        font-size: 30px;
+        margin-bottom: 40px;
       }

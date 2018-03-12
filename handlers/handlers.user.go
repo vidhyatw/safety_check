@@ -21,7 +21,7 @@ func ShowLoginPage(c *gin.Context) {
 func ShowWriteReviewPage(c *gin.Context) {
 	render(c, gin.H{
 		"title": "Write Review",
-	}, "create-review.html")
+	}, "create-review-new.html")
 }
 
 func PerformLogin(c *gin.Context) {

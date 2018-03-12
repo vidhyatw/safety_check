@@ -7,16 +7,18 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"path"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/hackerearth/safety_check/config"
 	"github.com/hackerearth/safety_check/models"
+	"github.com/hackerearth/safety_check/resources"
 )
 
 type SafetyScore struct {
-	Time  int `json:"time,omitempty" binding:"omitempty,len=0"`
-	Score int `json:"score,omitempty" binding:"omitempty,len=0"`
+	Time  int     `json:"time,omitempty" binding:"omitempty,len=0"`
+	Score float32 `json:"score,omitempty" binding:"omitempty,len=0"`
 }
 
 func ShowIndexPage(c *gin.Context) {
@@ -27,8 +29,24 @@ func ShowIndexPage(c *gin.Context) {
 	// 	"title":   "Home Page",
 	// 	"payload": reviews}, "index.html")
 	fmt.Printf("fb app id: ", config.GetFacebookApp())
+	// render(c, gin.H{
+	// 	"fb_appId": config.GetFacebookApp(), "CurrentPage": "home"}, "landing-page.html")
 	render(c, gin.H{
-		"fb_appId": config.GetFacebookApp(), "CurrentPage": "home"}, "landing-page.html")
+		"fb_appId": config.GetFacebookApp(), "CurrentPage": "home"}, "index.html")
+}
+
+func RenderAssets(c *gin.Context) {
+	file, _ := resources.Asset("static" + c.Param("path"))
+	contentType := ""
+	if path.Ext(c.Param("path")) == ".css" {
+		contentType = "text/css"
+	} else if path.Ext(c.Param("path")) == ".js" {
+		contentType = "text/javascript"
+	} else if path.Ext(c.Param("path")) == ".png" {
+		contentType = "image/png"
+	}
+	c.Data(http.StatusOK, contentType, file)
+	return
 }
 
 func ShowReviewCreationPage(c *gin.Context) {
@@ -65,7 +83,7 @@ func GetReview(c *gin.Context) {
 			// template
 			render(c, gin.H{
 				"placeType": placeType,
-				"payload":   review}, "display_reviews.html")
+				"payload":   review}, "display_reviews_new.html")
 
 		} else {
 			// If the review is not found, abort with an error
@@ -103,91 +121,86 @@ func CreateReview(c *gin.Context) {
 func GetSafetyScore(c *gin.Context) {
 	if place, err := createPlaceFromParams(c); err == nil {
 
-		review1 := models.Review{
-			Title:     "Sample",
-			Rating:    1,
-			Content:   "Very bad",
-			TimeStamp: "jhgjgj",
-			VisitTime: "7",
-			Place: models.Place{
-				PlaceID: "place1",
-				Type:    "restaurant",
-			},
-			Reviewer: models.Reviewer{},
-		}
-		review2 := models.Review{
-			Title:     "Sample",
-			Rating:    4,
-			Content:   "Very bad",
-			TimeStamp: "jhgjgj",
-			VisitTime: "9",
-			Place: models.Place{
-				PlaceID: "place1",
-				Type:    "restaurant",
-			},
-			Reviewer: models.Reviewer{},
-		}
-		review3 := models.Review{
-			Title:     "Sample",
-			Rating:    1,
-			Content:   "Very bad",
-			TimeStamp: "jhgjgj",
-			VisitTime: "9",
-			Place: models.Place{
-				PlaceID: "place1",
-				Type:    "restaurant",
-			},
-			Reviewer: models.Reviewer{},
-		}
-		review4 := models.Review{
-			Title:     "Sample",
-			Rating:    3,
-			Content:   "Very bad",
-			TimeStamp: "jhgjgj",
-			VisitTime: "9",
-			Place: models.Place{
-				PlaceID: "place1",
-				Type:    "restaurant",
-			},
-			Reviewer: models.Reviewer{},
-		}
+		// 	review1 := models.Review{
+		// 		Title:     "Sample",
+		// 		Rating:    1,
+		// 		Content:   "Very bad",
+		// 		VisitTime: "7",
+		// 		Place: models.Place{
+		// 			PlaceID: "place1",
+		// 			Type:    "restaurant",
+		// 		},
+		// 		Reviewer: models.Reviewer{},
+		// 	}
+		// 	review2 := models.Review{
+		// 		Title:     "Sample",
+		// 		Rating:    4,
+		// 		Content:   "Very bad",
+		// 		VisitTime: "9",
+		// 		Place: models.Place{
+		// 			PlaceID: "place1",
+		// 			Type:    "restaurant",
+		// 		},
+		// 		Reviewer: models.Reviewer{},
+		// 	}
+		// 	review3 := models.Review{
+		// 		Title:     "Sample",
+		// 		Rating:    1,
+		// 		Content:   "Very bad",
+		// 		VisitTime: "9",
+		// 		Place: models.Place{
+		// 			PlaceID: "place1",
+		// 			Type:    "restaurant",
+		// 		},
+		// 		Reviewer: models.Reviewer{},
+		// 	}
+		// 	review4 := models.Review{
+		// 		Title:     "Sample",
+		// 		Rating:    3,
+		// 		Content:   "Very bad",
+		// 		VisitTime: "9",
+		// 		Place: models.Place{
+		// 			PlaceID: "place1",
+		// 			Type:    "restaurant",
+		// 		},
+		// 		Reviewer: models.Reviewer{},
+		// 	}
 
-		review5 := models.Review{
-			Title:     "Sample",
-			Rating:    3,
-			Content:   "Very bad",
-			TimeStamp: "jhgjgj",
-			VisitTime: "16",
-			Place: models.Place{
-				PlaceID: "place1",
-				Type:    "restaurant",
-			},
-			Reviewer: models.Reviewer{},
-		}
+		// 	review5 := models.Review{
+		// 		Title:     "Sample",
+		// 		Rating:    3,
+		// 		Content:   "Very bad",
+		// 		VisitTime: "16",
+		// 		Place: models.Place{
+		// 			PlaceID: "place1",
+		// 			Type:    "restaurant",
+		// 		},
+		// 		Reviewer: models.Reviewer{},
+		// 	}
 
-		review6 := models.Review{
-			Title:     "Sample",
-			Rating:    4,
-			Content:   "Very bad",
-			TimeStamp: "jhgjgj",
-			VisitTime: "18",
-			Place: models.Place{
-				PlaceID: "place1",
-				Type:    "restaurant",
-			},
-			Reviewer: models.Reviewer{},
-		}
-		reviewList := []models.Review{review1, review2, review3, review4, review5, review6}
+		// 	review6 := models.Review{
+		// 		Title:     "Sample",
+		// 		Rating:    4,
+		// 		Content:   "Very bad",
+		// 		VisitTime: "18",
+		// 		Place: models.Place{
+		// 			PlaceID: "place1",
+		// 			Type:    "restaurant",
+		// 		},
+		// 		Reviewer: models.Reviewer{},
+		// 	}
+		// 	reviewList := []models.Review{review1, review2, review3, review4, review5, review6}
 
 		// Check if the review exists
-		if _, _, err := models.GetReviewsForPlace(place); err == nil {
+		if _, reviewArray, err := models.GetReviewsForPlace(place); err == nil {
 			// Call the render function with the title, review and the name of the
 			// template
 
-			timeGroupedScores := make(map[string][]int)
-			for _, r := range reviewList {
+			fmt.Println(reviewArray)
+			timeGroupedScores := make(map[string][]float32)
+			for _, r := range reviewArray {
 				if len(timeGroupedScores[r.VisitTime]) == 0 {
-					timeGroupedScores[r.VisitTime] = []int{r.Rating}
+					timeGroupedScores[r.VisitTime] = []float32{r.Rating}
 				} else {
 					timeGroupedScores[r.VisitTime] = append(timeGroupedScores[r.VisitTime], r.Rating)
 				}
@@ -195,11 +208,11 @@ func GetSafetyScore(c *gin.Context) {
 			scores := []SafetyScore{}
 
 			for k, v := range timeGroupedScores {
-				sum := 0
+				sum := float32(0)
 				for _, num := range v {
 					sum += num
 				}
-				safetyScore := (sum / len(v))
+				safetyScore := (sum / float32(len(v)))
 				timeOfTheDay, _ := strconv.Atoi(k)
 				scores = append(scores, SafetyScore{Time: timeOfTheDay, Score: safetyScore})
 
